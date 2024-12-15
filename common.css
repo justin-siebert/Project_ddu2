@@ -1,0 +1,17 @@
+#flexer{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#miniflexer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+}
+
+nav{
+    display: flex;
+    justify-content: center;
+}
