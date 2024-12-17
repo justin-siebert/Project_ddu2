@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Numbers: Find Same</title>
-    <link rel="stylesheet" href="common.css">
+    <title>Remove</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="remove.css">
 </head>
 <body>
     <nav>
-        <a href="index.html">Home</a>
+        <a href="../index.html">Home</a>
     </nav>
     <main>
         <div id="flexer">
@@ -18,13 +19,15 @@
                 <input id="submit" type="submit">
             </div>
             <div class="miniflexer">
-                <p id="message">Click on a Number to find copies</p>
-                <input id="reset" type="reset">
+                <button id="newRandomNumberButton"> New Random Number</button>
+                <p id="showNumber"> - </p>
+                <button>Remove</button>
+                <p id="showRemovedNumber"> - </p>
             </div>
             <div id="gridtable"></div>
         </div>
     </main>
-    <script src="common.js"></script>
-    <script src="findsame.js"></script>
+<script src="../common.js"></script>
+<script src="remove.js"></script>
 </body>
 </html>

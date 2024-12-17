@@ -1,3 +1,14 @@
+const message = document.getElementById("message")
+message.textContent = "Click on a Number to find copies";
+
+grid.addEventListener("click", (event)=>{
+    if (event.target && event.target.tagName ==="DIV"){
+        const clickedDiv = event.target
+        const randomNumber = parseInt(clickedDiv.textContent);
+        highlightSameNumbers(randomNumber);
+    }
+})
+
 function highlightSameNumbers(selectedNumber){
     const allDivs = document.querySelectorAll("#gridtable div");
     let count = 0;
@@ -11,14 +22,6 @@ function highlightSameNumbers(selectedNumber){
     })
     message.textContent = `${count} copies of the Number ${selectedNumber}`
 }
-
-submit.addEventListener("click", ()=> {
-    const text = document.getElementById("text").value
-    let numberOfBoxes = parseInt(text);
-    if (!isNaN(numberOfBoxes) && numberOfBoxes >0){
-        createGrid(numberOfBoxes)
-    }
-});
 
 reset.addEventListener("click", ()=>{
     grid.innerHTML = ""
