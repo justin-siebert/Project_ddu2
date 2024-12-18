@@ -1,0 +1,12 @@
+.removed{
+    background-color: rgb(69, 11, 11) !important;
+    color: white;
+}
+
+#newRandomNumberButton{
+    padding: 5px;
+}
+
+#removeButton{
+    padding: 5px;
+}

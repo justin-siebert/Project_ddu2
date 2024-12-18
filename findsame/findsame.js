@@ -9,20 +9,6 @@ grid.addEventListener("click", (event)=>{
     }
 })
 
-function highlightSameNumbers(selectedNumber){
-    const allDivs = document.querySelectorAll("#gridtable div");
-    let count = 0;
-    allDivs.forEach((div)=>{
-        if (parseInt(div.textContent) === selectedNumber){
-            div.style.backgroundColor = "lightblue"
-            count++
-        } else{
-            div.style.backgroundColor = "blanchedalmond"
-        }
-    })
-    message.textContent = `${count} copies of the Number ${selectedNumber}`
-}
-
 reset.addEventListener("click", ()=>{
     grid.innerHTML = ""
 });
