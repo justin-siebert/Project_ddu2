@@ -15,6 +15,12 @@ function removeNumber(){
     if ( selectedNumber=== null){
         return selectedNumber
     }
+    const count = countHighlightedNumbers(selectedNumber)
+    if (count === 0) {
+        showRemovedNumber.textContent = "There is nothing to remove";
+        return;
+    }
+
     const alldivs = document.querySelectorAll("#gridtable div")
     alldivs.forEach((div) =>{
         if (parseInt(div.textContent)===selectedNumber){
@@ -22,8 +28,9 @@ function removeNumber(){
             div.style.backgroundColor = "red"
             div.classList.add("removed")
             showRemovedNumber.textContent= `${selectedNumber} has been removed`
-        }
+        } 
     })
+    showRemovedNumber.textContent= `${selectedNumber} has been removed ${count} times`
 }
 
 removeButton.addEventListener("click", () => {
