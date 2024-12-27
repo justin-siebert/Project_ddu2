@@ -44,5 +44,3 @@ function highlightSameNumbers(selectedNumber){
         }
     })
 }
-
-//obs message måste flyttas till findesame??? eller
