@@ -1,11 +1,11 @@
 const sumALl = document.getElementById("sumAll")
 const sumMarkedNumbers = document.getElementById("sumMarkedNumbers")
+let markedSum = 0
 
 function sumAllNumbers (){
     let sum = 0
-    const alldivs = document.querySelectorAll("#gridtable div")
-    
-        alldivs.forEach((div)=>{
+    const allDivs = document.querySelectorAll("#gridtable div")
+    allDivs.forEach((div)=>{
         let number = parseInt(div.textContent)
         if (!isNaN(number)){
             sum += number
@@ -15,10 +15,48 @@ function sumAllNumbers (){
     return sum
 }
 
-function MarkedNumbersSummary(){
-    let sum = 0
+function handleGridClick(event) {
+    const clickedDiv = event.target; 
+
+    if (clickedDiv && clickedDiv.tagName === "DIV") {
+        const number = parseInt(clickedDiv.textContent);
+        if (!isNaN(number)) {
+            if (!clickedDiv.classList.contains("marked")) {
+                markedSum += number;
+                clickedDiv.classList.add("marked");
+            } else {
+                markedSum -= number;
+                clickedDiv.classList.remove("marked");
+                clickedDiv.style.backgroundColor = "";
+            }
+
+            sumMarkedNumbers.textContent = `${markedSum}`;
+        }
+    }
 }
+
+function deleteTypeShit (){
+    const allDivs = document.querySelectorAll("#gridtable div")
+    allDivs.forEach((div) =>{
+        if (div.classList.contains("marked")){
+            div.classList.remove("marked")
+        }
+    })
+
+    markedSum = 0;
+    if (sumMarkedNumbers) {
+        sumMarkedNumbers.textContent = "-";
+    }
+}
+
 
 submit.addEventListener("click", ()=>{
     sumAllNumbers()
+    deleteTypeShit()
 })
+
+grid.addEventListener("click", handleGridClick);
+
+reset.addEventListener("click", () => {
+deleteTypeShit()
+});

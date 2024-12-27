@@ -4,6 +4,7 @@ const reset = document.getElementById("reset")
 const grid = document.getElementById("gridtable")
 
 
+
 function createGrid (numberOfBoxes){
     grid.innerHTML = "";
     for (let i = 1; i <= numberOfBoxes; i++){

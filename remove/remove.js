@@ -21,8 +21,8 @@ function removeNumber(){
         return;
     }
 
-    const alldivs = document.querySelectorAll("#gridtable div")
-    alldivs.forEach((div) =>{
+    const allDivs = document.querySelectorAll("#gridtable div")
+    allDivs.forEach((div) =>{
         if (parseInt(div.textContent)===selectedNumber){
             div.textContent = "X"
             div.classList.add("removed")
@@ -39,8 +39,3 @@ removeButton.addEventListener("click", () => {
 newRandomNumberButton.addEventListener("click", ()=>{
     newRandomNumber()
 })
-
-
-
-//vi vill skapa en funktion som skapar ett random nummer mellan 1-99
-// funktionen ska anropas genom att man klickar på knappen innan 
