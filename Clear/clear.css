@@ -1,0 +1,12 @@
+#gridtable div:hover{
+    background-color: orange;
+}
+
+.marked{
+    background-color: black !important;
+}
+
+.marked:hover{
+    background-color: aquamarine !important;
+    color: aquamarine;
+}
