@@ -43,7 +43,6 @@ function highlightSameNumbers(selectedNumber){
             div.style.backgroundColor = "blanchedalmond"
         }
     })
-    message.textContent = `${count} copies of the Number ${selectedNumber}`
 }
 
 //obs message måste flyttas till findesame??? eller

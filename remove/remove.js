@@ -25,7 +25,6 @@ function removeNumber(){
     alldivs.forEach((div) =>{
         if (parseInt(div.textContent)===selectedNumber){
             div.textContent = "X"
-            div.style.backgroundColor = "red"
             div.classList.add("removed")
             showRemovedNumber.textContent= `${selectedNumber} has been removed`
         } 
