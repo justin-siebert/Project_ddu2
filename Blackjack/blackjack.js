@@ -20,3 +20,18 @@ function shuffleDeck (deck){
         [deck[i], deck[j]] = [deck[j], deck[i]];
     }
 }
+
+function createPlayers (numberOfPlayers){
+    let players = []
+    for (let i = 1; i <= numberOfPlayers; i++){
+        players.push({
+            name: `Player ${i}`,
+            hand: []
+        })
+    } 
+    players.push({
+        name: "Dealer",
+        hand: []
+    });
+    return players;
+}
