@@ -35,3 +35,12 @@ function createPlayers (numberOfPlayers){
     });
     return players;
 }
+
+function dealCards(players, deck, cardsPerPlayer = 2){
+    for (let i = 0; i < players.length; i++){
+        for (let player of players){
+            const card = deck.pop()
+            player.hand.push(card)
+        }
+    }
+}
