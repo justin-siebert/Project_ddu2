@@ -1,4 +1,4 @@
-nav{
+#dealerSide{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,3 +9,12 @@ nav{
     display: flex;
     justify-content: space-between;
 }
+
+#buttonFlex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
