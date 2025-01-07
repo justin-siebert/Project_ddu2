@@ -106,3 +106,23 @@ function gameStart (){
 }
 
 tapToStart.addEventListener("click", gameStart)
+
+function renderHands (players){
+    const board = document.getElementById("board")
+    board.innerHTML = ""
+
+    players.forEach(player =>{
+        const playerDiv = document.createElement("div")
+        playerDiv.classList.add("player")
+
+        const name = document.createElement("h3")
+        name.textContent = player.name
+
+        const hand = document.createElement("p");
+        hand.textContent = `Hand: ${player.hand.join(", ")}`;
+
+        playerDiv.appendChild(name);
+        playerDiv.appendChild(hand);
+        board.appendChild(playerDiv)
+    })
+}
