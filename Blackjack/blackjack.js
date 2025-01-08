@@ -4,6 +4,8 @@ const tapToStart = document.getElementById("tapToStart")
 const hitButton = document.getElementById("hitButton")
 const standButton = document.getElementById("standButton")
 const resultMessage = document.getElementById("resultMessage")
+const resetButton = document.getElementById("resetButton");
+
 
 let currentPlayerIndex = 0;
 let players = [];
@@ -82,14 +84,6 @@ function calculateHandValue(hand){
 function gameStart (){
     let numberOfPlayers = parseInt(prompt("Enter a number of Players (1-3)"))
     let buyIn = parseInt(prompt("Enter the buy in amount"))
-    showMoneyOnScreen.textContent =`${buyIn}`
-
-    const deck = createDeck();
-    shuffleDeck(deck);
-
-    const players = createPlayers(numberOfPlayers);
-
-    dealCards(players, deck);
     
     if (isNaN(numberOfPlayers) || numberOfPlayers <1 || numberOfPlayers >3){
         alert("Please enter a valid number of Players between 1 and 3")
@@ -101,11 +95,17 @@ function gameStart (){
         return
     }
 
+    showMoneyOnScreen.textContent = `${buyIn}`;
+    deck = createDeck();
+    shuffleDeck(deck);
+
+    players = createPlayers(numberOfPlayers);
+    dealCards(players, deck);
+
+    renderHands(players); 
     console.log("Players and their hands:", players);
     return players;
 }
-
-tapToStart.addEventListener("click", gameStart)
 
 function renderHands (players){
     const board = document.getElementById("board")
@@ -126,3 +126,73 @@ function renderHands (players){
         board.appendChild(playerDiv)
     })
 }
+
+function playerHit (){
+    const currentPlayer =  players[currentPlayerIndex]
+    const card = deck.pop
+    currentPlayer.hand.push(card)
+
+    renderHands(players)
+
+    const handValue = calculateHandValue(currentPlayer.hand);
+    if (handValue > 21) {
+        resultMessage.textContent = `${currentPlayer.name} busts!`;
+        nextTurn();
+    }
+}
+
+function dealersTurn (){
+    const dealer = players[players.length-1]
+    let dealerValue = calculateHandValue(dealer.hand)
+
+    while (dealerValue < 17){
+        const card = deck.pop()
+        dealer.hand.push(card)
+        dealerValue = calculateHandValue(dealer.hand)
+    }
+    renderHands(players);
+    determineWinner()
+}
+
+function determineWinner() {
+    const dealerValue = calculateHandValue(players[players.length - 1].hand);
+    resultMessage.textContent = ""
+
+    players.slice(0, -1).forEach(player => {
+        const playerValue = calculateHandValue(player.hand);
+        if (playerValue > 21) {
+            resultMessage.textContent += `${player.name} busts! `
+        } else if (dealerValue > 21 || playerValue > dealerValue) {
+            resultMessage.textContent += `${player.name} wins! `
+        } else {
+            resultMessage.textContent += `${player.name} loses. `
+        }
+    })
+}
+
+function resetGame() {
+    players = [];
+    deck = [];
+    currentPlayerIndex = 0;
+    resultMessage.textContent = "";
+    showMoneyOnScreen.textContent = "";
+    document.getElementById("board").innerHTML = "";
+}
+
+function playerStand() {
+    nextTurn();
+}
+
+function nextTurn(){
+    currentPlayerIndex++
+    if (currentPlayerIndex >= players.length -1){
+        dealersTurn()
+    } else {
+        renderHands(players)
+    }
+}
+
+standButton.addEventListener("click", playerStand)
+tapToStart.addEventListener("click", gameStart)
+resetButton.addEventListener("click", resetGame)
+hitButton.addEventListener("click", playerHit)
