@@ -22,26 +22,3 @@ submit.addEventListener("click", ()=> {
     }
 });
 
-function countHighlightedNumbers (selectedNumber){
-    let count = 0
-    const allDivs= document.querySelectorAll("#gridtable div")
-    allDivs.forEach((div)=> {
-        if (parseInt(div.textContent)=== selectedNumber){
-            count++
-        }
-    })
-    return count
-}
-
-function highlightSameNumbers(selectedNumber){
-    const allDivs = document.querySelectorAll("#gridtable div");
-    let count = 0;
-    allDivs.forEach((div)=>{
-        if (parseInt(div.textContent) === selectedNumber){
-            div.style.backgroundColor = "lightblue"
-            count++
-        } else{
-            div.style.backgroundColor = "blanchedalmond"
-        }
-    })
-}
