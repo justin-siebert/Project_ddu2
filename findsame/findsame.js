@@ -6,8 +6,8 @@ grid.addEventListener("click", (event) => {
         const clickedDiv = event.target;
         const selectedNumber = parseInt(clickedDiv.textContent); 
 
-        highlightSameNumbers(selectedNumber); 
-        const count = countHighlightedNumbers(selectedNumber);
+        const count = highlightSameNumbers(selectedNumber);
+
 
         if (count >= 1) {
             message.textContent = `${count} copies of the Number ${selectedNumber}`;
@@ -31,16 +31,6 @@ function highlightSameNumbers(selectedNumber){
             count++
         } else{
             div.style.backgroundColor = "blanchedalmond"
-        }
-    })
-}
-
-function countHighlightedNumbers (selectedNumber){
-    let count = 0
-    const allDivs= document.querySelectorAll("#gridtable div")
-    allDivs.forEach((div)=> {
-        if (parseInt(div.textContent)=== selectedNumber){
-            count++
         }
     })
     return count
