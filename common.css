@@ -34,6 +34,25 @@ nav{
     height: 50px;
 }
 
+a{
+    font-family: "Jacquarda Bastarda";
+}
+
+p{
+    font-family: "Sofadi One";
+}
+
 input{
     text-align: center;
+}
+
+@font-face {
+    font-family: "Jacquarda Bastarda";
+    src: url(fonts/JacquardaBastarda9-Regular.ttf);
+   
+}
+
+@font-face {
+    font-family: "Sofadi One";
+    src: url(fonts/SofadiOne-Regular.ttf);
 }
