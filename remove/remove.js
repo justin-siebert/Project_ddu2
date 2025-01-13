@@ -15,7 +15,7 @@ function removeNumber(){
     if ( selectedNumber=== null){
         return selectedNumber
     }
-    const count = countHighlightedNumbers(selectedNumber)
+    const count = highlightSameNumbers(selectedNumber)
     if (count === 0) {
         showRemovedNumber.textContent = "There is nothing to remove";
         return;
@@ -40,16 +40,6 @@ newRandomNumberButton.addEventListener("click", ()=>{
     newRandomNumber()
 })
 
-function countHighlightedNumbers (selectedNumber){
-    let count = 0
-    const allDivs= document.querySelectorAll("#gridtable div")
-    allDivs.forEach((div)=> {
-        if (parseInt(div.textContent)=== selectedNumber){
-            count++
-        }
-    })
-    return count
-}
 
 function highlightSameNumbers(selectedNumber){
     const allDivs = document.querySelectorAll("#gridtable div");
@@ -61,5 +51,6 @@ function highlightSameNumbers(selectedNumber){
         } else{
             div.style.backgroundColor = "blanchedalmond"
         }
+        return count
     })
 }
