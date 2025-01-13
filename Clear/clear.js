@@ -20,7 +20,7 @@ function handleGridClick(event) {
     }
 }
 
-function deleteTypeShit (){
+function deleteStuff (){
     const allDivs = document.querySelectorAll("#gridtable div")
     allDivs.forEach((div) =>{
         if (div.classList.contains("marked")){
@@ -30,4 +30,4 @@ function deleteTypeShit (){
 }
 
 grid.addEventListener("click", handleGridClick);
-clearButton.addEventListener("click", deleteTypeShit)
+clearButton.addEventListener("click", deleteStuff)
