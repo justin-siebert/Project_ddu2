@@ -51,6 +51,6 @@ function highlightSameNumbers(selectedNumber){
         } else{
             div.style.backgroundColor = "blanchedalmond"
         }
-        return count
     })
+    return count
 }

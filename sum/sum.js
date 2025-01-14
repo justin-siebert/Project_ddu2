@@ -18,7 +18,7 @@ function sumAllNumbers (){
 function handleGridClick(event) {
     const clickedDiv = event.target; 
 
-    if (clickedDiv && clickedDiv.tagName === "DIV") {
+    if (clickedDiv && clickedDiv.tagName === "DIV" && clickedDiv.id !== "gridtable") {
         const number = parseInt(clickedDiv.textContent);
         if (!isNaN(number)) {
             if (!clickedDiv.classList.contains("marked")) {
