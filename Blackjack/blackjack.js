@@ -6,7 +6,6 @@ const standButton = document.getElementById("standButton")
 const resultMessage = document.getElementById("resultMessage")
 const resetButton = document.getElementById("resetButton");
 
-
 let currentPlayerIndex = 0;
 let players = [];
 let deck = [];
@@ -81,18 +80,23 @@ function calculateHandValue(hand){
 
 }
 
-function gameStart (){
-    let numberOfPlayers = parseInt(prompt("Enter a number of Players (1-3)"))
-    let buyIn = parseInt(prompt("Enter the buy in amount"))
-    
-    if (isNaN(numberOfPlayers) || numberOfPlayers <1 || numberOfPlayers >3){
-        alert("Please enter a valid number of Players between 1 and 3")
-        return
+function gameStart() {
+    if (players.length > 0) {
+        alert("Spelet är redan igång!");
+        return;
     }
 
-    if (isNaN(buyIn) || buyIn <= 0){
-        alert ("Enter a valid amount")
-        return
+    let numberOfPlayers = parseInt(prompt("Enter a number of Players (1-3)"));
+    let buyIn = parseInt(prompt("Enter the buy-in amount"));
+
+    if (isNaN(numberOfPlayers) || numberOfPlayers < 1 || numberOfPlayers > 3) {
+        alert("Please enter a valid number of Players between 1 and 3");
+        return;
+    }
+
+    if (isNaN(buyIn) || buyIn <= 0) {
+        alert("Enter a valid amount");
+        return;
     }
 
     showMoneyOnScreen.textContent = `${buyIn}`;
@@ -102,34 +106,39 @@ function gameStart (){
     players = createPlayers(numberOfPlayers);
     dealCards(players, deck);
 
-    renderHands(players); 
-    console.log("Players and their hands:", players);
-    return players;
+    renderHands(players);
+    currentPlayerIndex = 0;
 }
 
-function renderHands (players){
-    const board = document.getElementById("board")
-    board.innerHTML = ""
 
-    players.forEach(player =>{
-        const playerDiv = document.createElement("div")
-        playerDiv.classList.add("player")
+function renderHands(players) {
+    const board = document.getElementById("board");
+    board.innerHTML = "";
 
-        const name = document.createElement("h3")
-        name.textContent = player.name
+    players.forEach((player, index) => {
+        const playerDiv = document.createElement("div");
+        playerDiv.classList.add("player");
+
+        const name = document.createElement("h3");
+        name.textContent = player.name;
+
+        if (index === currentPlayerIndex) {
+            name.style.color = "green";
+        }
 
         const hand = document.createElement("p");
         hand.textContent = `Hand: ${player.hand.join(", ")}`;
 
         playerDiv.appendChild(name);
         playerDiv.appendChild(hand);
-        board.appendChild(playerDiv)
-    })
+        board.appendChild(playerDiv);
+    });
 }
+
 
 function playerHit (){
     const currentPlayer =  players[currentPlayerIndex]
-    const card = deck.pop
+    const card = deck.pop()
     currentPlayer.hand.push(card)
 
     renderHands(players)
@@ -183,16 +192,45 @@ function playerStand() {
     nextTurn();
 }
 
-function nextTurn(){
-    currentPlayerIndex++
-    if (currentPlayerIndex >= players.length -1){
-        dealersTurn()
+function nextTurn() {
+    currentPlayerIndex++;
+    if (currentPlayerIndex >= players.length - 1) {
+        dealersTurn();
     } else {
-        renderHands(players)
+        const currentPlayer = players[currentPlayerIndex];
+        const handValue = calculateHandValue(currentPlayer.hand);
+
+        if (handValue > 21) {
+            resultMessage.textContent = `${currentPlayer.name} busts!`;
+            nextTurn(); 
+        } else {
+            renderHands(players);
+        }
     }
 }
 
-standButton.addEventListener("click", playerStand)
-tapToStart.addEventListener("click", gameStart)
-resetButton.addEventListener("click", resetGame)
-hitButton.addEventListener("click", playerHit)
+
+function updateButtonStates() {
+    hitButton.disabled = currentPlayerIndex >= players.length - 1;
+    standButton.disabled = currentPlayerIndex >= players.length - 1;
+    tapToStart.disabled = players.length > 0;
+    resetButton.disabled = players.length === 0;
+}
+
+function gameStart() {
+    updateButtonStates();
+}
+
+function resetGame() {
+    updateButtonStates();
+}
+
+standButton.addEventListener("click", () => {
+    playerStand();
+    updateButtonStates();
+});
+
+hitButton.addEventListener("click", () => {
+    playerHit();
+    updateButtonStates();
+});
