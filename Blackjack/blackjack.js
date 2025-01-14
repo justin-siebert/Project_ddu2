@@ -213,13 +213,18 @@ function nextTurn() {
 function updateButtonStates() {
     hitButton.disabled = currentPlayerIndex >= players.length - 1;
     standButton.disabled = currentPlayerIndex >= players.length - 1;
-    tapToStart.disabled = players.length > 0;
+    //tapToStart.disabled = players.length > 0;
     resetButton.disabled = players.length === 0;
 }
 
+tapToStart.addEventListener("click", ()=>{
+    gameStart()
+})
+/*
 function gameStart() {
     updateButtonStates();
 }
+    */
 
 function resetGame() {
     updateButtonStates();
